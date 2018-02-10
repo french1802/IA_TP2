@@ -5,7 +5,7 @@ public class Main {
 
     public static void main(String[] args) {
         Problem problem = new Problem();
-        Strategy strategy = new IterativeDeepening();
+        Strategy strategy = new DepthFirstSearch();
 
         Node result = treeSearch(problem, strategy);
         System.out.println(result.result());
@@ -14,26 +14,23 @@ public class Main {
 
     private static Node treeSearch(Problem problem, Strategy strategy) {
 
-        if (strategy.getNom() == "Iterative Deepening")
-           // return strategy.depthLimitedSearch();
 
-        else {
-            Node node;
-            LinkedList<Node> fringe = new LinkedList<>();
-            ArrayList<Action> visited = new ArrayList<>();
-            fringe.add(new Node(problem.getInitialState()));
+        Node node;
+        LinkedList<Node> fringe = new LinkedList<>();
+        ArrayList<Action> visited = new ArrayList<>();
+        fringe.add(new Node(problem.getInitialState()));
 
-            while (!fringe.isEmpty()) {
-                node = strategy.chooseFringeNode(fringe);
-                if (problem.goalTest(node)) {
-                    return node;
-                } else {
-                    fringe.addAll(strategy.expand(problem, node));
-                }
+        while (!fringe.isEmpty()) {
+            node = strategy.chooseFringeNode(fringe);
+            if (problem.goalTest(node)) {
+                return node;
+            } else {
+                fringe = strategy.insertAll(strategy.expand(problem, node), fringe);
             }
-            return new Node("failure");
         }
+        return new Node("failure");
     }
+
 
 
 }

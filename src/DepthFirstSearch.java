@@ -3,16 +3,20 @@
 import java.util.LinkedList;
 
 
-public class IterativeDeepening extends Strategy {
+public class DepthFirstSearch extends Strategy {
 
     Node chooseFringeNode(LinkedList<Node> fringe) {
         return fringe.remove();
     }
 
 
-    IterativeDeepening()
+
+    int depth;
+
+    DepthFirstSearch()
     {
-        this.setNom("IterativeDeepening");
+        this.setNom("DepthFirstSearch");
+        depth =15;
     }
 
     public LinkedList<Node> expand(Problem problem,  Node node) {
@@ -21,19 +25,25 @@ public class IterativeDeepening extends Strategy {
         {
 
             String endState = action.getEndState();
-            int cost = problem.getCost(node.getState(), endState);
-            Node s = new Node(endState, node, node.getDepth()+1, cost);
-            successors.add(s);
+            if(!(endState == node.getParent().getState()))
+            {
+                int cost = problem.getCost(node.getState(), endState);
+                Node s = new Node(endState, node, node.getDepth() + 1, cost);
+                successors.add(s);
+            }
         }
 
         return successors;
     }
 
-
-
-    public Node depthLimitedSearch(Problem problem, int limitDepth)
+    public Node algorithmExecution(Problem problem)
     {
-        return recursiveDLS(new Node(problem.getInitialState()),problem,limitDepth);
+        return depthLimitedSearch(problem);
+    }
+
+    public Node depthLimitedSearch(Problem problem)
+    {
+        return recursiveDLS(new Node(problem.getInitialState()),problem,depth);
     }
 
     public Node recursiveDLS(Node node, Problem problem, int limitDepth)
@@ -61,4 +71,34 @@ public class IterativeDeepening extends Strategy {
         else
             return new Node("failure");
     }
+
+
+    /*
+    //
+    //
+    //
+    //     KIKOU JE SUIS EN DESSOUS
+    /
+    /
+    //
+    //
+     */
+    public LinkedList<Node> insertAll(LinkedList<Node> expand, LinkedList<Node> fringe) // depth first search
+    {
+        expand.addAll(fringe);
+        return expand;
+    }
+    /*
+    public Node iterativeDeepeningSearch(Problem problem)
+    {
+        for(int i = 0; )
+    }*/
+    public int getDepth() {
+        return depth;
+    }
+
+    public void setDepth(int depth) {
+        this.depth = depth;
+    }
+
 }

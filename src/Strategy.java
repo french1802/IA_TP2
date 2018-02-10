@@ -17,5 +17,7 @@ abstract class Strategy {
     }
 
     abstract LinkedList<Node> expand(Problem problem,Node node);
+    abstract LinkedList<Node> insertAll(LinkedList<Node> expand, LinkedList<Node> fringe);
     abstract Node chooseFringeNode(LinkedList<Node> fringe);
+    abstract Node algorithmExecution(Problem problem);
 }
