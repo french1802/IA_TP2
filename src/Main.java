@@ -13,19 +13,27 @@ public class Main {
     }
 
     private static Node treeSearch(Problem problem, Strategy strategy) {
-        Node currentNode;
-        LinkedList<Node> fringe = new LinkedList<>();
-        ArrayList<Action> visited = new ArrayList<>();
-        fringe.add(new Node(problem.getInitialState()));
 
-        while(!fringe.isEmpty()) {
-            currentNode = strategy.chooseFringeNode(fringe);
-            if(problem.goalTest(currentNode)) {
-                return currentNode;
-            } else {
-                strategy.expand(problem, fringe, visited, currentNode);
+        if (strategy.getNom() == "Iterative Deepening")
+           // return strategy.depthLimitedSearch();
+
+        else {
+            Node node;
+            LinkedList<Node> fringe = new LinkedList<>();
+            ArrayList<Action> visited = new ArrayList<>();
+            fringe.add(new Node(problem.getInitialState()));
+
+            while (!fringe.isEmpty()) {
+                node = strategy.chooseFringeNode(fringe);
+                if (problem.goalTest(node)) {
+                    return node;
+                } else {
+                    fringe.addAll(strategy.expand(problem, node));
+                }
             }
+            return new Node("failure");
         }
-        return new Node("failure");
     }
+
+
 }

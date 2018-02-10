@@ -97,7 +97,7 @@ class Problem {
         return succession;
     }
 
-    String getCityStart() {
+    String getInitialState() {
         return this.cityStart;
     }
 
