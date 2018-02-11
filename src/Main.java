@@ -26,7 +26,7 @@ public class Main {
             if (problem.goalTest(node)) {
                 return node;
             } else {
-                fringe = strategy.insertAll(strategy.expand(problem, node, tested), fringe);
+                fringe = strategy.insertAll(strategy.expand(problem, node), fringe);
             }
         }
         return new Node("failure");

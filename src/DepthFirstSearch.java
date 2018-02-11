@@ -29,15 +29,15 @@ public class DepthFirstSearch implements Strategy {
         return fringe.remove();
     }
 
-    public LinkedList<Node> expand(Problem problem, Node node, ArrayList<Action> tested) {
+    public LinkedList<Node> expand(Problem problem, Node node) {
         LinkedList<Node> successors = new LinkedList<>();
         for(Action action: problem.successors(node.getState()))
         {
 
             String endState = action.getEndState();
-            if(!tested.contains(action))
+            if(!node.hasParent(endState))
             {
-                tested.add(action);
+
                 int cost = problem.getCost(node.getState(), endState);
                 Node s = new Node(endState, node, node.getDepth() + 1, cost);
                 successors.add(s);
@@ -55,11 +55,10 @@ public class DepthFirstSearch implements Strategy {
 
     public Node depthLimitedSearch(Problem problem)
     {
-        ArrayList<Action> tested = new ArrayList<>();
-        return recursiveDLS(new Node(problem.getInitialState()),problem,depth, tested);
+        return recursiveDLS(new Node(problem.getInitialState()),problem,depth);
     }
 
-    public Node recursiveDLS(Node node, Problem problem, int limitDepth, ArrayList<Action> tested)
+    public Node recursiveDLS(Node node, Problem problem, int limitDepth)
     {
         boolean cutoff = false;
         if(problem.goalTest(node))
@@ -68,10 +67,10 @@ public class DepthFirstSearch implements Strategy {
             return new Node("cutoff");
         else
         {
-            LinkedList<Node> successors = this.expand(problem, node, tested);
+            LinkedList<Node> successors = this.expand(problem, node);
             for(Node successor: successors)
             {
-                Node result = recursiveDLS(successor,problem,limitDepth, tested);
+                Node result = recursiveDLS(successor,problem,limitDepth);
                 if (result.getState() == "cutoff")
                     cutoff = true;
                 else if(result.getState() != "failure")

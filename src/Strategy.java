@@ -7,7 +7,7 @@ public interface Strategy {
 
     String getNom();
 
-    LinkedList<Node> expand(Problem problem, Node node, ArrayList<Action> tested);
+    LinkedList<Node> expand(Problem problem, Node node);
 
     LinkedList<Node> insertAll(LinkedList<Node> expand, LinkedList<Node> fringe);
 

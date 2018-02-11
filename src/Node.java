@@ -53,7 +53,22 @@ class Node {
         }
         return s;
     }
-
+    public boolean hasParent(String target)
+    {
+        if(this.getParent()!=null)
+        {
+            if(target.equals(this.getParent().getState()))
+            {
+                return true;
+            }
+            else
+            {
+                return this.getParent().hasParent(target);
+            }
+        }
+        else
+            return false;
+    }
     int solutionCost() {
         int cost = this.getCost();
         Node parent = this.getParent();
