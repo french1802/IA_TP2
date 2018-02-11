@@ -18,7 +18,7 @@ public class Main {
 
         Node node;
         LinkedList<Node> fringe = new LinkedList<>();
-        ArrayList<Action> visited = new ArrayList<>();
+        ArrayList<Action> tested = new ArrayList<>();
         fringe.add(new Node(problem.getInitialState()));
 
         while (!fringe.isEmpty()) {
@@ -26,7 +26,7 @@ public class Main {
             if (problem.goalTest(node)) {
                 return node;
             } else {
-                fringe = strategy.insertAll(strategy.expand(problem, node), fringe);
+                fringe = strategy.insertAll(strategy.expand(problem, node, tested), fringe);
             }
         }
         return new Node("failure");

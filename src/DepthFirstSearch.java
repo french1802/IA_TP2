@@ -1,5 +1,6 @@
 
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 
@@ -28,13 +29,15 @@ public class DepthFirstSearch implements Strategy {
         return fringe.remove();
     }
 
-    public LinkedList<Node> expand(Problem problem,  Node node) {
+    public LinkedList<Node> expand(Problem problem, Node node, ArrayList<Action> tested) {
         LinkedList<Node> successors = new LinkedList<>();
         for(Action action: problem.successors(node.getState()))
         {
 
             String endState = action.getEndState();
-            if(node.getParent() != null && !(endState.equals(node.getParent().getState()))) {
+            if(!tested.contains(action))
+            {
+                tested.add(action);
                 int cost = problem.getCost(node.getState(), endState);
                 Node s = new Node(endState, node, node.getDepth() + 1, cost);
                 successors.add(s);
@@ -52,10 +55,11 @@ public class DepthFirstSearch implements Strategy {
 
     public Node depthLimitedSearch(Problem problem)
     {
-        return recursiveDLS(new Node(problem.getInitialState()),problem,depth);
+        ArrayList<Action> tested = new ArrayList<>();
+        return recursiveDLS(new Node(problem.getInitialState()),problem,depth, tested);
     }
 
-    public Node recursiveDLS(Node node, Problem problem, int limitDepth)
+    public Node recursiveDLS(Node node, Problem problem, int limitDepth, ArrayList<Action> tested)
     {
         boolean cutoff = false;
         if(problem.goalTest(node))
@@ -64,10 +68,10 @@ public class DepthFirstSearch implements Strategy {
             return new Node("cutoff");
         else
         {
-            LinkedList<Node> successors = this.expand(problem, node);
+            LinkedList<Node> successors = this.expand(problem, node, tested);
             for(Node successor: successors)
             {
-                Node result = recursiveDLS(successor,problem,limitDepth);
+                Node result = recursiveDLS(successor,problem,limitDepth, tested);
                 if (result.getState() == "cutoff")
                     cutoff = true;
                 else if(result.getState() != "failure")

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public interface Strategy {
@@ -6,7 +7,7 @@ public interface Strategy {
 
     String getNom();
 
-    LinkedList<Node> expand(Problem problem, Node node);
+    LinkedList<Node> expand(Problem problem, Node node, ArrayList<Action> tested);
 
     LinkedList<Node> insertAll(LinkedList<Node> expand, LinkedList<Node> fringe);
 
