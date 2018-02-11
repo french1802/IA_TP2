@@ -1,23 +1,15 @@
-
-import java.util.ArrayList;
 import java.util.LinkedList;
 
-abstract class Strategy {
+public interface Strategy {
 
+    void setNom(String nom);
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+    String getNom();
 
-    private String nom;
+    LinkedList<Node> expand(Problem problem, Node node);
 
+    LinkedList<Node> insertAll(LinkedList<Node> expand, LinkedList<Node> fringe);
 
-    public String getNom() {
-        return nom;
-    }
-
-    abstract LinkedList<Node> expand(Problem problem,Node node);
-    abstract LinkedList<Node> insertAll(LinkedList<Node> expand, LinkedList<Node> fringe);
-    abstract Node chooseFringeNode(LinkedList<Node> fringe);
-    abstract Node algorithmExecution(Problem problem);
+    Node chooseFringeNode(LinkedList<Node> fringe);
+//    Node algorithmExecution(Problem problem);
 }

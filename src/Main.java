@@ -5,6 +5,7 @@ public class Main {
 
     public static void main(String[] args) {
         Problem problem = new Problem();
+
         Strategy strategy = new DepthFirstSearch();
 
         Node result = treeSearch(problem, strategy);
