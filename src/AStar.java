@@ -5,16 +5,16 @@ import java.util.LinkedList;
 
 
 
-public class AStarNonInformee implements Strategy {
+public class AStar implements Strategy {
 
 
 
 
     private String nom;
 
-    AStarNonInformee()
+    AStar()
     {
-        this.setNom("A*NI");
+        this.setNom("A*");
     }
 
     public void setNom(String nom) {
@@ -36,19 +36,12 @@ public class AStarNonInformee implements Strategy {
         {
 
             String endState = action.getEndState();
-            //int parentCost = 0;
-            /*
-            if(node.getParent() != null)
-            {
-                parentCost = node.getParent().getCost();
-            }
-            */
             if(!node.hasParent(endState))
             {
 
                 int cost = problem.getCost(node.getState(), endState);
                 Node s = new Node(endState, node, node.getDepth() + 1, cost);
-                s.setHeurCost(s.getCost() + node.getCost());
+                //s.setHeurCost(problem.getStrait(endstate) + s.solutionCost());
                 successors.add(s);
             }
 

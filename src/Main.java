@@ -9,10 +9,7 @@ public class Main {
 
         Node result = treeSearch(problem, strategy);
         System.out.println(result.result());
-        if(strategy.getNom() == "A*")
-            System.out.println("cost : " + result.getCost());
-        else
-            System.out.println("cost : " + result.solutionCost());
+        System.out.println("cost : " + result.solutionCost());
     }
 
     private static Node treeSearch(Problem problem, Strategy strategy) {

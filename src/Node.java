@@ -4,12 +4,14 @@ class Node implements Comparable{
     private Node parent;
     private int depth;
     private int cost;
+    private int heurCost;
 
     Node(String state, Node parent, int depth, int cost) {
         this.state = state;
         this.parent = parent;
         this.depth = depth;
         this.cost = cost;
+        this.heurCost =0;
     }
 
     Node(String state) {
@@ -27,6 +29,10 @@ class Node implements Comparable{
     }
 
     int getCost() { return cost; }
+
+    void setHeurCost(int set) { this.heurCost = set;}
+
+    int getHeurCost(){return heurCost;}
 
     Node getParent() {
         if(depth > 0) {
@@ -83,7 +89,7 @@ class Node implements Comparable{
     public int compareTo(Object o)
     {
         Node n = (Node) o;
-        int res = this.getCost() - n.getCost();
+        int res = this.getHeurCost() - n.getHeurCost();
         return res;
 
     }
