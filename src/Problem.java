@@ -10,6 +10,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import static java.lang.System.exit;
 
@@ -18,6 +20,7 @@ class Problem {
     private String cityEnd;
     private ArrayList<String> cities = new ArrayList<>();
     private ArrayList<Action> actions = new ArrayList<>();
+    private Map<String, Integer> straightLineDistance = new HashMap<>();
 
     Problem() {
 
@@ -27,6 +30,7 @@ class Problem {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
             Document document = documentBuilder.parse(xmlFileData);
+            String cityName;
 
             // Load the list of cities
             NodeList citylist = document.getElementsByTagName("City");
@@ -35,8 +39,18 @@ class Problem {
 
                 if (node.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
                     Element element = (Element) node;
-                    cities.add(element.getElementsByTagName("Name").item(0).getTextContent());
+                    cityName = element.getElementsByTagName("Name").item(0).getTextContent();
+                    cities.add(cityName);
 
+                    if(element.getElementsByTagName("SLDistance").item(0) != null) {
+                        try {
+                            int SLD = Integer.parseInt(element.getElementsByTagName("SLDistance").item(0).getTextContent());
+                            straightLineDistance.put(cityName, SLD);
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace();
+                            exit(-1);
+                        }
+                    }
                 }
             }
 
@@ -112,6 +126,10 @@ class Problem {
             i++;
         }
         return 0;
+    }
+
+    int getStrait(String endstate) {
+        return straightLineDistance.get(endstate);
     }
 
     boolean goalTest(Node node) {

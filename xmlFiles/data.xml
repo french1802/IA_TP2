@@ -3,63 +3,83 @@
 	<Cities>
 		<City>
 			<Name>Arad</Name>
+			<SLDistance>366</SLDistance>
 		</City>
 		<City>
 			<Name>Sibiu</Name>
+			<SLDistance>253</SLDistance>
 		</City>
 		<City>
 			<Name>Timisoara</Name>
+			<SLDistance>329</SLDistance>
 		</City>
 		<City>
 			<Name>Zerind</Name>
+			<SLDistance>374</SLDistance>
 		</City>
 		<City>
 			<Name>Oradea</Name>
+			<SLDistance>380</SLDistance>
 		</City>
 		<City>
 			<Name>Lugoj</Name>
+			<SLDistance>244</SLDistance>
 		</City>
 		<City>
 			<Name>Mehadia</Name>
+			<SLDistance>241</SLDistance>
 		</City>
 		<City>
 			<Name>Dobreta</Name>
+			<SLDistance>242</SLDistance>
 		</City>
 		<City>
 			<Name>Rimnicu Vilcea</Name>
+			<SLDistance>193</SLDistance>
 		</City>
 		<City>
 			<Name>Fagaras</Name>
+			<SLDistance>178</SLDistance>
 		</City>
 		<City>
 			<Name>Craiova</Name>
+			<SLDistance>160</SLDistance>
 		</City>
 		<City>
 			<Name>Pitesti</Name>
+			<SLDistance>98</SLDistance>
 		</City>
 		<City>
 			<Name>Bucharest</Name>
+			<SLDistance>0</SLDistance>
 		</City>
 		<City>
 			<Name>Giurgiu</Name>
+			<SLDistance>77</SLDistance>
 		</City>
 		<City>
 			<Name>Urziceni</Name>
+			<SLDistance>80</SLDistance>
 		</City>
 		<City>
 			<Name>Hirsova</Name>
+			<SLDistance>151</SLDistance>
 		</City>
 		<City>
 			<Name>Eforie</Name>
+			<SLDistance>161</SLDistance>
 		</City>
 		<City>
 			<Name>Vaslui</Name>
+			<SLDistance>199</SLDistance>
 		</City>
 		<City>
 			<Name>Lasi</Name>
+			<SLDistance>226</SLDistance>
 		</City>
 		<City>
 			<Name>Neamt</Name>
+			<SLDistance>234</SLDistance>
 		</City>
 	</Cities>
 
