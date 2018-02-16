@@ -1,5 +1,5 @@
 
-class Node {
+class Node implements Comparable{
     private String state;
     private Node parent;
     private int depth;
@@ -78,4 +78,14 @@ class Node {
         }
         return cost;
     }
+
+    @Override
+    public int compareTo(Object o)
+    {
+        Node n = (Node) o;
+        int res = this.getCost() - n.getCost();
+        return res;
+
+    }
+
 }
